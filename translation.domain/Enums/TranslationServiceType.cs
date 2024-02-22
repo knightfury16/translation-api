@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace translation.domain.Enum
 {
-  public enum TranslationService
+  public enum TranslationServiceType
     {
         Default = 0,
         Shakespear = 1
