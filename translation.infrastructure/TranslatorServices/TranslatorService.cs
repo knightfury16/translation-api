@@ -19,11 +19,10 @@ namespace translation.infrastructure.TranslatorServices
         {
             //call the translation service here
             // for now 
-            OriginalMessage originalMsg = new OriginalMessage(message);
-            TranslatedMessage translatedMessage = new TranslatedMessage("Valorous morrow to thee, sir thither mine cousin", translationServiceType);
-            Translation translation = new Translation(originalMsg, translatedMessage);
+            TranslatedMessage message = runScript(message)
 
-            return translation;
+
+            return message;
         }
     }
 }
