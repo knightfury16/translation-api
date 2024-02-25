@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using translation.application;
+using translation.api.Models;
+using translation.application.Common.Interfaces;
+using translation.application.Common.Models;
 using translation.domain.Entity;
 using translation.domain.Enum;
 using translation.domain.Translation;
@@ -17,11 +19,16 @@ namespace translation.api.Controllers
         {
             _translator = translator;
         }
-        [HttpGet]
-        public Translation GetTranslation()
+        [HttpPost]
+        public Translation GetTranslation([FromBody] RequestDto requestDto)
         {
-            OriginalMessage originalMessage = new OriginalMessage("Hello there my friend");
-            return _translator.Translate(originalMessage, TranslationServiceType.Shakespear);
+            Message message = new Message(requestDto.message);
+
+            TranslateRequestDto translateReqDto = new TranslateRequestDto{
+                message = message,
+                translationServiceType = TranslationServiceType.Shakespear
+            };
+            return _translator.Translate(translateReqDto);
         }
     }
 }
