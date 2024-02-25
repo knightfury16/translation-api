@@ -1,6 +1,6 @@
 ﻿using translation.domain.Enum;
 
-namespace translation.domain;
+namespace translation.domain.Entity;
 
 public class Message: BaseEntity
 {
@@ -9,5 +9,10 @@ public class Message: BaseEntity
     public Message(string text): base()
     {
         Text = text;
+    }
+
+    public override string ToString()
+    {
+        return Text;
     }
 }

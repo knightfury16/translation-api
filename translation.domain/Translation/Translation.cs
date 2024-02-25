@@ -16,7 +16,7 @@ namespace translation.domain.Translation
 
         
 
-        private Translation()
+        private Translation() 
         {
             
         }
