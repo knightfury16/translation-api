@@ -9,6 +9,6 @@ namespace translation.domain.Enum
   public enum TranslationServiceType
     {
         Default = 0,
-        Shakespear = 1
+        shakespeare = 1
     }
 }
