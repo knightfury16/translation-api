@@ -58,7 +58,7 @@ class Program
     {
         var scriptRunner = new ScriptRunner();
 
-        var result = await scriptRunner.RunScriptAsync("myscript.py", "hello there my friend");
+        var result = await scriptRunner.RunScriptAsync("myscript.py", "hello there my friend", "shakespeare");
         Console.WriteLine(result);
         Console.ReadLine();
     }
