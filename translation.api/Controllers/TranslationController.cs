@@ -20,15 +20,16 @@ namespace translation.api.Controllers
             _translator = translator;
         }
         [HttpPost]
-        public Translation GetTranslation([FromBody] RequestDto requestDto)
+        public async Task<Translation?> GetTranslation([FromBody] RequestDto requestDto)
         {
             Message message = new Message(requestDto.message);
 
             TranslateRequestDto translateReqDto = new TranslateRequestDto{
                 message = message,
-                translationServiceType = TranslationServiceType.Shakespear
+                translationServiceType = TranslationServiceType.shakespeare
             };
-            return _translator.Translate(translateReqDto);
+            var tanslationtxt = await _translator.Translate(translateReqDto);
+            return tanslationtxt;
         }
     }
 }

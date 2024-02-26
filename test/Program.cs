@@ -48,7 +48,7 @@ public class ScriptRunner : IScriptRunner
     private string DetermineScriptInterpreter(string scriptPath)
     {
         // Add logic to determine the script interpreter based on the file extension or other criteria
-        // For simplicity, this example assumes the interpreter is always "python"
+        // For simplicity, this example assumes the interpretergit  is always "python"
         return "python";
     }
 }

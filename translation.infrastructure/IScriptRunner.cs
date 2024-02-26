@@ -9,6 +9,6 @@ namespace translation.infrastructure
 {
     public interface IScriptRunner
     {
-        Task<Message> RunScriptAsync(string scriptPath, params string[] args);
+        Task<string> RunScriptAsync(string scriptFileName, string additionalArgument, params string[] arguments);
     }
 }

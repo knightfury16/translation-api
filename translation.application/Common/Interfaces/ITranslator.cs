@@ -8,6 +8,6 @@ namespace translation.application.Common.Interfaces;
 
 public interface ITranslator
 {
-    Translation Translate(TranslateRequestDto request);
+    Task<Translation?> Translate(TranslateRequestDto request);
     Translation AutoTranslate(TranslateRequestDto request);
 }

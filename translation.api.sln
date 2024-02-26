@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "translation.infrastructure"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "translation.api", "translation.api\translation.api.csproj", "{5448D7EC-9DEB-47C5-B137-1F2B4E100814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{6F231B50-EE7B-4165-BCB5-65A9677C7B83}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{5448D7EC-9DEB-47C5-B137-1F2B4E100814}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5448D7EC-9DEB-47C5-B137-1F2B4E100814}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5448D7EC-9DEB-47C5-B137-1F2B4E100814}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F231B50-EE7B-4165-BCB5-65A9677C7B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F231B50-EE7B-4165-BCB5-65A9677C7B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F231B50-EE7B-4165-BCB5-65A9677C7B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F231B50-EE7B-4165-BCB5-65A9677C7B83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

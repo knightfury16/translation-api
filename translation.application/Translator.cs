@@ -22,14 +22,14 @@ namespace translation.application
             _translatorService = translatorService;
         }
 
-        public Translation Translate(TranslateRequestDto request)
+        public async Task<Translation?> Translate(TranslateRequestDto request)
         {
             //unpacking
             string message = request.message.ToString();
             TranslationServiceType translationService = request.translationServiceType;
 
             //calling the service
-            var translation = _translatorService.Translate(message, translationService);
+            var translation = await _translatorService.Translate(message, translationService);
 
             return translation;
         }
