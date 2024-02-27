@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,12 @@ namespace translation.infrastructure.TranslatorServices
 {
     public class TranslatorService : ITranslatorService
     {
-       
+        private readonly IConfiguration _configuration;
 
+        public TranslatorService(IConfiguration configuration )
+        {
+            _configuration = configuration;
+        }
         public Translation Translate(string message, TranslationServiceType translationServiceType)
         {
             //call the translation service here
