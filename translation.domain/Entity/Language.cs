@@ -8,6 +8,10 @@ namespace translation.domain.Entity
 {
     public class Language
     {
-        public string Name { get; set; }
+        public required string Name { get; set; }
+
+        public Language()
+        {
+        }
     }
 }

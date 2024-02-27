@@ -8,7 +8,8 @@ namespace translation.domain.Entity
 {
     public class OriginalMessage : Message
     {
-        public OriginalMessage(string text) : base(text)
+        
+        public OriginalMessage(string text, Language language) : base(text,language)
         {
         }
     }
