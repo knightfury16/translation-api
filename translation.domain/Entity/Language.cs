@@ -13,5 +13,10 @@ namespace translation.domain.Entity
         public Language()
         {
         }
+
+        public Language(string name)
+        {
+            Name = name;
+        }
     }
 }
