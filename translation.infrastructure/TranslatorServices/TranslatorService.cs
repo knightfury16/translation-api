@@ -20,15 +20,27 @@ namespace translation.infrastructure.TranslatorServices
         {
             _configuration = configuration;
         }
-        public Translation Translate(string message, TranslationServiceType translationServiceType)
+        public Translation Translate(string message, string fromLanguage, string toLanguage)
         {
             //call the translation service here
             // for now 
-            OriginalMessage originalMsg = new OriginalMessage(message);
-            TranslatedMessage translatedMessage = new TranslatedMessage("Valorous morrow to thee, sir thither mine cousin", translationServiceType);
+
+            //Language mapper
+            
+            Language originalLan= CheckLanguageAvailability(fromLanguage);
+            Language translatedLan = CheckLanguageAvailability(toLanguage);
+            //call service if originalLan and translated lan not null
+
+            OriginalMessage originalMsg = new OriginalMessage(message,originalLan);
+            TranslatedMessage translatedMessage = new TranslatedMessage("Valorous morrow to thee, sir thither mine cousin", translatedLan);
             Translation translation = new Translation(originalMsg, translatedMessage);
 
             return translation;
+        }
+
+        private Language CheckLanguageAvailability(string language)
+        {
+            return new Language { Name = language };
         }
     }
 }

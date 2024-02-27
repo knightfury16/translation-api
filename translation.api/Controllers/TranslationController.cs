@@ -22,11 +22,13 @@ namespace translation.api.Controllers
         [HttpPost]
         public Translation GetTranslation([FromBody] RequestDto requestDto)
         {
-            Message message = new Message(requestDto.message);
+            var message = requestDto.message;
+            var fromlanguage = requestDto.fromLanguage;
 
             TranslateRequestDto translateReqDto = new TranslateRequestDto{
-                message = message,
-                translationServiceType = TranslationServiceType.Shakespear
+                message = requestDto.message,
+                fromLanguage = requestDto.fromLanguage,
+                toLanguage = requestDto.toLanguage,
             };
             return _translator.Translate(translateReqDto);
         }
