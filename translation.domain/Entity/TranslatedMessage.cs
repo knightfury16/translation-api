@@ -9,10 +9,8 @@ namespace translation.domain.Entity
 {
     public class TranslatedMessage: Message
     {
-        public TranslationServiceType  TranslatedUsingService { get; set; }
-        public TranslatedMessage(string text, TranslationServiceType translationServiceType) : base(text)
+        public TranslatedMessage(string text, Language language) : base(text, language)
         {
-            TranslatedUsingService = translationServiceType;
         }
 
     }
