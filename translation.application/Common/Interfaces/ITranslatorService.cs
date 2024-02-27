@@ -7,6 +7,6 @@ namespace translation.application.Common.Interfaces
 {
     public interface ITranslatorService
     {
-        Translation Translate(string message, TranslationServiceType translationServiceType);
+        Translation Translate(string message, string fromLanguage, string toLanguage);
     }
 }

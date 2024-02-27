@@ -25,11 +25,12 @@ namespace translation.application
         public Translation Translate(TranslateRequestDto request)
         {
             //unpacking
-            string message = request.message.ToString();
-            TranslationServiceType translationService = request.translationServiceType;
+            string message = request.message;
+            string fromLanguage = request.fromLanguage;
+            string toLanguage = request.toLanguage;
 
             //calling the service
-            var translation = _translatorService.Translate(message, translationService);
+            var translation = _translatorService.Translate(message, fromLanguage, toLanguage);
 
             return translation;
         }

@@ -11,7 +11,8 @@ namespace translation.application.Common.Models
 {
     public class TranslateRequestDto
     {
-        public required Message message { get; set; }
-        public TranslationServiceType translationServiceType { get; set; }
+        public required string message { get; set; }
+        public string fromLanguage { get; set; }
+        public string toLanguage { get; set; }
     }
 }
