@@ -52,7 +52,7 @@ namespace translation.infrastructure
             if(language != null && _languageData != null && _languageData.Languages != null)
             {
                 Language foundLanguage = _languageData.Languages
-                    .FirstOrDefault(lang => lang.Name.Equals(language,StringComparison.OrdinalIgnoreCase));
+                    .FirstOrDefault(lang => lang.Name.Equals(language, StringComparison.OrdinalIgnoreCase));
 
                 return foundLanguage;
             }
