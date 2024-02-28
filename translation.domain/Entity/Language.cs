@@ -9,14 +9,16 @@ namespace translation.domain.Entity
     public class Language
     {
         public required string Name { get; set; }
+        public string Code { get; set; }
 
         public Language()
         {
         }
 
-        public Language(string name)
+        public Language(string name, string code)
         {
             Name = name;
+            Code = code;
         }
     }
 }
