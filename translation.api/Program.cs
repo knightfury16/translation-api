@@ -1,5 +1,6 @@
 using translation.application;
 using translation.application.Common.Interfaces;
+using translation.infrastructure;
 using translation.infrastructure.TranslatorServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITranslator,Translator>();
 builder.Services.AddScoped<ITranslatorService, TranslatorService>();
+builder.Services.AddScoped<IAvailableLanguage, AvailableLanguage>();
 builder.Configuration.AddJsonFile("appsettings.json",optional:false, reloadOnChange:true);
 
 var app = builder.Build();
