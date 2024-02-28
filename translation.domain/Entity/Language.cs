@@ -15,9 +15,10 @@ namespace translation.domain.Entity
         {
         }
 
-        public Language(string name)
+        public Language(string name, string code)
         {
             Name = name;
+            Code = code;
         }
     }
 }
