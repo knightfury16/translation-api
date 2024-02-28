@@ -12,46 +12,10 @@ using translation.domain;
 using translation.domain.Entity;
 using translation.domain.Enum;
 using translation.domain.Translation;
+using translation.infrastructure.Models;
 
 namespace translation.infrastructure.TranslatorServices
 {
-
-    public class ResponseData
-    {
-        public string TranslatedText { get; set; }
-        public double Match { get; set; }
-    }
-
-    public class Match
-    {
-        public string Id { get; set; }
-        public string Segment { get; set; }
-        public string Translation { get; set; }
-        public string Source { get; set; }
-        public string Target { get; set; }
-        public string Quality { get; set; }
-        public object Reference { get; set; }
-        public int UsageCount { get; set; }
-        public string Subject { get; set; }
-        public string CreatedBy { get; set; }
-        public string LastUpdatedBy { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime LastUpdateDate { get; set; }
-        public double MatchValue { get; set; }
-    }
-
-    public class MyMemoryApiResponse
-    {
-        public ResponseData responseData { get; set; }
-        public bool quotaFinished { get; set; }
-        public object mtLangSupported { get; set; }
-        public string responseDetails { get; set; }
-        public int responseStatus { get; set; }
-        public object responderId { get; set; }
-        public object exception_code { get; set; }
-        public List<Match> matches { get; set; }
-    }
-
     public class TranslatorService : ITranslatorService
     {
         private readonly IConfiguration _configuration;
@@ -65,61 +29,50 @@ namespace translation.infrastructure.TranslatorServices
 
         public Translation Translate(string message, string fromLanguage, string toLanguage)
         {
-            //call the my-memory api in this format https://api.mymemory.translated.net/get?q=beautiful&langpair=en|bn
-
             var originalLan = _availableLanguage.CheckLanguageAvailability(fromLanguage);
             var translatedLan = _availableLanguage.CheckLanguageAvailability(toLanguage);
 
+            if(originalLan == null || translatedLan == null)
+            {
+                throw new Exception($"From {fromLanguage} to {toLanguage} service is not available.");
+            }
 
-
-                
-            //call the api here with the format
-            // Call the MyMemory API
-            string apiUrl = $"https://api.mymemory.translated.net/get?q={Uri.EscapeDataString(message)}&langpair={originalLan.Code}|{translatedLan.Code}";
+            var apiUrl = GetRequestUrl(message, originalLan, translatedLan) ?? throw new Exception("Could not find URL");
+            
             MyMemoryApiResponse apiResponse = CallMyMemoryApi(apiUrl);
 
-            //map the response to translation obj
 
             // Map the API response to the Translation object
-            OriginalMessage originalMsg = new OriginalMessage(message, originalLan);
-            TranslatedMessage translatedMessage = new TranslatedMessage(apiResponse.responseData.TranslatedText, translatedLan);
-            Translation translation = new Translation(originalMsg, translatedMessage);
+            OriginalMessage originalMsg = new(message, originalLan);
+            TranslatedMessage translatedMessage = new(apiResponse.responseData.TranslatedText, translatedLan);
+            Translation translation = new(originalMsg, translatedMessage);
 
 
             return translation;
         }
 
+        private string? GetRequestUrl(string message, Language orginalLanguage, Language translatedLanguage)
+        {
+            var baseUrl = _configuration["ApiUrl"];
+
+            if( baseUrl == null )
+            {
+                return null;
+            }
+
+            string requestUrl = $"{baseUrl}/get?q={Uri.EscapeDataString(message)}&langpair={orginalLanguage.Code}|{translatedLanguage.Code}";
+
+            return requestUrl;
+        }
+
         private MyMemoryApiResponse CallMyMemoryApi(string apiUrl)
         {
-            // Implement logic to make the API call and deserialize the response
-            // You may use HttpClient or any other preferred method for making HTTP requests
-            // Here, I'm using a simple WebClient for demonstration purposes
             using (WebClient webClient = new WebClient())
             {
                 string jsonResponse = webClient.DownloadString(apiUrl);
-                return JsonConvert.DeserializeObject<MyMemoryApiResponse>(jsonResponse);
+                return JsonConvert.DeserializeObject<MyMemoryApiResponse>(jsonResponse) ?? 
+                    throw new Exception("Could not deseeialize MyMemory Api response!!");
             }
-        }
-
-        private string? CheckLanguageAvailability(string language)
-        {
-            Dictionary<string,string> supportedLanguages = GetSupportedLanguages(); // Implement this method
-         
-            return supportedLanguages.ContainsKey(language) ? supportedLanguages[language] : null;
-        }
-         
-
-        private Dictionary<string, string> GetSupportedLanguages()
-        {
-            // Define your supported languages here
-            Dictionary<string, string> supportedLanguages = new Dictionary<string, string>
-            {
-                { "English", "en" },
-                { "Bangla", "bn" },
-                // Add more languages as needed
-            };
-
-            return supportedLanguages;
         }
 
     }

@@ -4,17 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using translation.domain.Entity;
+using translation.infrastructure.Models;
 
 namespace translation.infrastructure
 {
-
-    public class LangugeData
-    {
-        public List<Language> Languages { get; set; }
-    }
 
     public class AvailableLanguage : IAvailableLanguage
     {
