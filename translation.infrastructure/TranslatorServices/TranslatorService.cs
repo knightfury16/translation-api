@@ -71,7 +71,7 @@ namespace translation.infrastructure.TranslatorServices
             {
                 string jsonResponse = webClient.DownloadString(apiUrl);
                 return JsonConvert.DeserializeObject<MyMemoryApiResponse>(jsonResponse) ?? 
-                    throw new Exception("Could not deseeialize MyMemory Api response!!");
+                    throw new Exception("Could not deserialize MyMemory Api response!!");
             }
         }
 
