@@ -55,31 +55,34 @@ namespace translation.infrastructure.TranslatorServices
     public class TranslatorService : ITranslatorService
     {
         private readonly IConfiguration _configuration;
+        private readonly IAvailableLanguage _availableLanguage;
 
-        public TranslatorService(IConfiguration configuration )
+        public TranslatorService(IConfiguration configuration, IAvailableLanguage availableLanguage )
         {
             _configuration = configuration;
+            _availableLanguage = availableLanguage;
         }
+
         public Translation Translate(string message, string fromLanguage, string toLanguage)
         {
             //call the my-memory api in this format https://api.mymemory.translated.net/get?q=beautiful&langpair=en|bn
 
-            var originalLan = CheckLanguageAvailability(fromLanguage);
-            var translatedLan = CheckLanguageAvailability(toLanguage);
+            var originalLan = _availableLanguage.CheckLanguageAvailability(fromLanguage);
+            var translatedLan = _availableLanguage.CheckLanguageAvailability(toLanguage);
 
 
 
-
+                
             //call the api here with the format
             // Call the MyMemory API
-            string apiUrl = $"https://api.mymemory.translated.net/get?q={Uri.EscapeDataString(message)}&langpair={originalLan}|{translatedLan}";
+            string apiUrl = $"https://api.mymemory.translated.net/get?q={Uri.EscapeDataString(message)}&langpair={originalLan.Code}|{translatedLan.Code}";
             MyMemoryApiResponse apiResponse = CallMyMemoryApi(apiUrl);
 
             //map the response to translation obj
 
             // Map the API response to the Translation object
-            OriginalMessage originalMsg = new OriginalMessage(message, new Language { Name = fromLanguage});
-            TranslatedMessage translatedMessage = new TranslatedMessage(apiResponse.responseData.TranslatedText, new Language { Name = toLanguage});
+            OriginalMessage originalMsg = new OriginalMessage(message, originalLan);
+            TranslatedMessage translatedMessage = new TranslatedMessage(apiResponse.responseData.TranslatedText, translatedLan);
             Translation translation = new Translation(originalMsg, translatedMessage);
 
 
