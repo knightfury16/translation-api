@@ -22,9 +22,6 @@ namespace translation.api.Controllers
         [HttpPost]
         public Translation GetTranslation([FromBody] RequestDto requestDto)
         {
-            var message = requestDto.message;
-            var fromlanguage = requestDto.fromLanguage;
-
             TranslateRequestDto translateReqDto = new TranslateRequestDto{
                 message = requestDto.message,
                 fromLanguage = requestDto.fromLanguage,
