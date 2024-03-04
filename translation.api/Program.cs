@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ITranslator,Translator>();
+builder.Services.AddApplicationDependency();
 builder.Services.AddScoped<ITranslatorService, TranslatorService>();
 builder.Services.AddSingleton<IAvailableLanguage, AvailableLanguage>();
 builder.Configuration.AddJsonFile("appsettings.json",optional:false, reloadOnChange:true);
