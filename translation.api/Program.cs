@@ -12,8 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationDependency();
-builder.Services.AddScoped<ITranslatorService, TranslatorService>();
-builder.Services.AddSingleton<IAvailableLanguage, AvailableLanguage>();
+builder.Services.AddInfrastructure();
 builder.Configuration.AddJsonFile("appsettings.json",optional:false, reloadOnChange:true);
 
 var app = builder.Build();
