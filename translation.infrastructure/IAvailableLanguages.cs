@@ -9,6 +9,8 @@ namespace translation.infrastructure
 {
     public interface IAvailableLanguage
     {
-        Language CheckLanguageAvailability(string language);
+        Language? CheckLanguageAvailability(string language);
+        List<Language> GetAvailableLanguage();
+
     }
 }

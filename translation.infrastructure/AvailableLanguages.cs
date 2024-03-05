@@ -43,6 +43,7 @@ namespace translation.infrastructure
             }
         }
 
+        
 
         public Language? CheckLanguageAvailability(string language)
         {
@@ -55,6 +56,11 @@ namespace translation.infrastructure
             }
 
             return null;
+        }
+
+        public List<Language> GetAvailableLanguage()
+        {
+            return _languageData.Languages;
         }
     }
 }
