@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.CommandLine;
 using translation.application;
 using translation.application.Common.Interfaces;
 using translation.application.Common.Models;
@@ -10,7 +12,35 @@ namespace translation.console;
 
 class Program
 {
-    static void Main(string[] args)
+    static int Main(string[] args)
+    {
+
+        var textOption = new Option<string>(name: "--text", description: "Text to translate"){ IsRequired = true };
+        var fromLanguageOption = new Option<string>(name: "--from", description: "Laanguage to translate from") { IsRequired = true };
+        var toLanguageOption = new Option<string>(name:"--to",description:"Language to translate to") { IsRequired= true };
+
+        var rootCommand = new RootCommand("A console app to translate language");
+
+        var translateCommand = new Command("translate", "Translate language")
+        {
+            textOption,
+            fromLanguageOption,
+            toLanguageOption,
+        };
+
+        rootCommand.AddCommand(translateCommand);
+
+        translateCommand.SetHandler((text, fromLanguage, toLanguage) =>
+        {
+            translate(text, fromLanguage, toLanguage);
+
+        }, textOption, fromLanguageOption, toLanguageOption);
+
+
+        return rootCommand.Invoke(args);
+    }
+
+    private static void translate(string text, string fromLanguage, string toLanguage)
     {
 
         var serviceCollection = new ServiceCollection();
@@ -22,9 +52,9 @@ class Program
 
         var tranlatorRequestDto = new TranslateRequestDto
         {
-            message = "when is the meeting?",
-            fromLanguage = "english",
-            toLanguage = "spanish",
+            message = text,
+            fromLanguage = fromLanguage,
+            toLanguage = toLanguage,
         };
 
         var translatorService = serviceProvider.GetRequiredService<ITranslator>();
@@ -32,6 +62,5 @@ class Program
         var translation = translatorService?.Translate(tranlatorRequestDto);
 
         Console.WriteLine(translation?._translatedText.ToString());
-
     }
 }
