@@ -12,9 +12,21 @@ namespace translation.console;
 
 class Program
 {
+    private static ServiceCollection _serviceCollection;
+    private static ServiceProvider? _serviceProvider;
+
+    static Program()
+    {
+        _serviceCollection = new ServiceCollection();
+        _serviceCollection.AddConfiguration();
+        _serviceCollection.AddMyServices();
+
+        _serviceProvider = _serviceCollection.BuildServiceProvider();
+    }
+
+
     static int Main(string[] args)
     {
-
         var textOption = new Option<string>(name: "--text", description: "Text to translate"){ IsRequired = true };
         var fromLanguageOption = new Option<string>(name: "--from", description: "Laanguage to translate from") { IsRequired = true };
         var toLanguageOption = new Option<string>(name:"--to",description:"Language to translate to") { IsRequired= true };
@@ -43,12 +55,6 @@ class Program
     private static void translate(string text, string fromLanguage, string toLanguage)
     {
 
-        var serviceCollection = new ServiceCollection();
-
-        serviceCollection.AddConfiguration();
-        serviceCollection.AddMyServices();
-
-        var serviceProvider = serviceCollection.BuildServiceProvider();
 
         var tranlatorRequestDto = new TranslateRequestDto
         {
@@ -57,7 +63,7 @@ class Program
             toLanguage = toLanguage,
         };
 
-        var translatorService = serviceProvider.GetRequiredService<ITranslator>();
+        var translatorService = _serviceProvider.GetRequiredService<ITranslator>();
 
         var translation = translatorService?.Translate(tranlatorRequestDto);
 
