@@ -67,6 +67,6 @@ class Program
 
         var translation = translatorService?.Translate(tranlatorRequestDto);
 
-        Console.WriteLine(translation?._translatedText.ToString());
+        Console.WriteLine(translation?.TranslatedText.ToString());
     }
 }
