@@ -11,9 +11,8 @@ namespace translation.domain.Translation
     public class Translation
     {
         public Guid Id { get; set; }
-        //remove the underscore and see the consequences of changing a domain type.
-        public OriginalMessage _originalText { get; private set;}
-        public TranslatedMessage _translatedText { get; private set;}
+        public OriginalMessage OriginalText { get; private set;}
+        public TranslatedMessage TranslatedText { get; private set;}
 
         
 
@@ -25,8 +24,8 @@ namespace translation.domain.Translation
         public Translation(OriginalMessage originalText, TranslatedMessage translatedText)
         {
             Id = Guid.NewGuid();
-            _originalText = originalText;
-            _translatedText = translatedText;
+            OriginalText = originalText;
+            TranslatedText = translatedText;
         }
     }
 }

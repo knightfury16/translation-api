@@ -9,7 +9,7 @@ namespace translation.domain.Entity
     public class Language
     {
         public required string Name { get; set; }
-        public string Code { get; set; }
+        public string Code { get; set; } = String.Empty;
 
         public Language()
         {
