@@ -47,20 +47,18 @@ namespace translation.infrastructure
 
         public Language? CheckLanguageAvailability(string language)
         {
-            if(language != null && _languageData != null && _languageData.Languages != null)
+            if(language != null && _languageData?.Languages != null)
             {
-                Language foundLanguage = _languageData.Languages
+                return  _languageData.Languages
                     .FirstOrDefault(lang => lang.Name.Equals(language, StringComparison.OrdinalIgnoreCase));
-
-                return foundLanguage;
             }
 
             return null;
         }
 
-        public List<Language> GetAvailableLanguage()
+        public List<Language>? GetAvailableLanguage()
         {
-            return _languageData.Languages;
+            return _languageData?.Languages;
         }
     }
 }
