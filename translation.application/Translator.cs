@@ -35,7 +35,7 @@ namespace translation.application
             return translation;
         }
 
-        public Translation AutoTranslate(TranslateRequestDto request)
+        public Translation AutoTranslate(AutoTranslateRequestDto request)
         {
             throw new NotImplementedException();
         }
