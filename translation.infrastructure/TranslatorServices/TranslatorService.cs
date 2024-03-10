@@ -75,5 +75,9 @@ namespace translation.infrastructure.TranslatorServices
             }
         }
 
+        public Translation AutoTranslate(string message, string toLanguage)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
