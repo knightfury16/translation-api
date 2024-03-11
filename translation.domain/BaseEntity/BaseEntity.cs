@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace translation.domain
 {
-    public abstract class BaseEntity
+    internal abstract class BaseEntity
     {
         public Guid Id { get; set; }
 
