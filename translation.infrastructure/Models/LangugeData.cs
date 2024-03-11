@@ -2,7 +2,7 @@
 
 namespace translation.infrastructure.Models
 {
-    public class LangugeData
+    internal class LangugeData
     {
         public List<Language> Languages { get; set; }
     }

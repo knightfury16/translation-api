@@ -16,7 +16,7 @@ using translation.infrastructure.Models;
 
 namespace translation.infrastructure.TranslatorServices
 {
-    public class TranslatorService : ITranslatorService
+    internal class TranslatorService : ITranslatorService
     {
         private readonly IConfiguration _configuration;
         private readonly IAvailableLanguage _availableLanguage;

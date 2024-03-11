@@ -12,7 +12,7 @@ using translation.domain.Translation;
 
 namespace translation.application
 {
-    public class Translator : ITranslator
+    internal class Translator : ITranslator
     {
 
         private readonly ITranslatorService _translatorService;

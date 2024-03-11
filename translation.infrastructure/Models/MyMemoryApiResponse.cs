@@ -3,13 +3,13 @@
 namespace translation.infrastructure.Models
 {
 
-    public class ResponseData
+    internal class ResponseData
     {
         public string TranslatedText { get; set; }
         public double Match { get; set; }
     }
 
-    public class Match
+    internal class Match
     {
         public string Id { get; set; }
         public string Segment { get; set; }
@@ -26,7 +26,7 @@ namespace translation.infrastructure.Models
         public DateTime LastUpdateDate { get; set; }
         public double MatchValue { get; set; }
     }
-    public class MyMemoryApiResponse
+    internal class MyMemoryApiResponse
     {
         public ResponseData responseData { get; set; }
         public bool quotaFinished { get; set; }

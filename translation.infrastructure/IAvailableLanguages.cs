@@ -7,7 +7,7 @@ using translation.domain.Entity;
 
 namespace translation.infrastructure
 {
-    public interface IAvailableLanguage
+    internal interface IAvailableLanguage
     {
         Language? CheckLanguageAvailability(string language);
         List<Language>? GetAvailableLanguage();
